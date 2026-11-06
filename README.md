@@ -1,528 +1,198 @@
-\# 🛡️ DataGuard — Data Quality Monitor
+# DataGuard — Data Quality Monitor
 
+A configurable data quality monitoring and validation application built with **Python, Pandas, YAML, and Streamlit**. DataGuard helps identify data issues, profile datasets, validate business rules, and perform basic data cleaning through an interactive dashboard.
 
+## Overview
 
-A configurable data quality monitoring and validation application built with \*\*Python, Pandas, PyYAML, and Streamlit\*\*.
+Data quality is essential for reliable analytics and decision-making. DataGuard provides a reusable validation engine and an interactive interface to help users understand dataset quality, detect inconsistencies, and generate validation reports.
 
+The project demonstrates practical data engineering concepts, including modular Python development, configurable validation rules, automated testing, and CI/CD.
 
+## Key Features
 
-DataGuard helps users inspect datasets, identify data quality issues, validate records against configurable business rules, and apply safe cleaning operations through an interactive dashboard.
+- **Dataset Profiling:** Analyze row counts, column types, missing values, duplicate records, unique values, and numerical statistics.
+- **Configurable Validation:** Define data quality rules using YAML without changing the validation engine.
+- **Validation Engine:** Check required columns, missing values, uniqueness, email formats, dates, numeric types, non-negative values, and allowed categories.
+- **Interactive Dashboard:** Upload CSV files and explore profiling and validation results through Streamlit.
+- **Data Cleaning:** Trim whitespace, standardize empty strings, and optionally remove duplicate rows.
+- **Validation Reporting:** Generate downloadable validation reports and cleaned datasets.
+- **Automated Testing:** Unit tests with pytest and code coverage reporting.
+- **Continuous Integration:** GitHub Actions workflow to run tests automatically on pushes and pull requests.
 
+## Technology Stack
 
-
-\## 🚀 Key Features
-
-
-
-\### 1. Dataset Profiling
-
-\- Total rows and columns
-
-\- Missing-value analysis
-
-\- Duplicate-row detection
-
-\- Column-level data types
-
-\- Unique-value counts
-
-\- Missing-value percentages
-
-\- Numeric statistics including minimum, maximum, and mean
-
-
-
-\### 2. Configurable Data Validation
-
-Define data quality rules using YAML configuration.
-
-
-
-Supported validation checks:
-
-\- Required columns and missing values
-
-\- Duplicate values in specified columns
-
-\- Email format validation
-
-\- Date format validation
-
-\- Numeric data validation
-
-\- Non-negative numeric values
-
-\- Allowed-value validation
-
-
-
-Validation results include severity levels, failed counts, pass/fail status, and descriptive messages.
-
-
-
-\### 3. Interactive Dashboard
-
-Built using Streamlit, with dedicated sections for:
-
-\- Dataset Preview
-
-\- Data Profiling
-
-\- Validation Results
-
-\- Data Cleaning
-
-
-
-\### 4. Data Cleaning
-
-Apply configurable cleaning operations:
-
-\- Trim leading and trailing whitespace
-
-\- Standardize empty strings as missing values
-
-\- Optionally remove completely duplicated rows
-
-
-
-The original DataFrame is preserved. Missing values are not automatically deleted or filled.
-
-
-
-\### 5. Reporting and Export
-
-\- Validation summary
-
-\- Rule-pass score
-
-\- Downloadable validation report
-
-\- Downloadable cleaned CSV
-
-
-
-\*\*Note:\*\* The rule-pass score represents the percentage of validation checks passed. It is not a measure of the percentage of clean records.
-
-
-
-\---
-
-
-
-\## 🧰 Technology Stack
-
-
-
-| Technology | Purpose |
-
+| Area | Technologies |
 |---|---|
+| Programming | Python 3.12 |
+| Data Processing | Pandas |
+| Dashboard | Streamlit |
+| Configuration | YAML, PyYAML |
+| Testing | Pytest, pytest-cov |
+| Version Control | Git, GitHub |
+| CI/CD | GitHub Actions |
 
-| Python 3.12 | Core application |
+## Architecture
 
-| Pandas | Data processing and analysis |
-
-| Streamlit | Interactive dashboard |
-
-| PyYAML | YAML-based rule configuration |
-
-| Pytest | Automated testing |
-
-| pytest-cov | Test coverage |
-
-| GitHub Actions | Continuous integration |
-
-
-
-\---
-
-
-
-\## 🏗️ Project Architecture
-
-
+The application follows a modular structure, keeping the data quality engine independent of the Streamlit interface.
 
 ```text
-
 dataguard-data-quality-monitor/
-
 │
-
 ├── .github/
-
 │   └── workflows/
-
 │       └── tests.yml
-
 │
-
 ├── config/
-
-│   └── quality\_rules.yaml
-
+│   └── quality_rules.yaml
 │
-
 ├── docs/
-
 │   └── architecture.md
-
 │
-
 ├── src/
-
 │   └── dataguard/
-
-│       ├── \_\_init\_\_.py
-
+│       ├── __init__.py
 │       ├── cleaning.py
-
 │       ├── profiler.py
-
 │       ├── reporting.py
-
 │       ├── rules.py
-
 │       └── validators.py
-
 │
-
 ├── tests/
-
-│   ├── sample\_data/
-
+│   ├── sample_data/
 │   │   └── customers.csv
-
-│   ├── test\_cleaning.py
-
-│   ├── test\_profiler.py
-
-│   ├── test\_reporting.py
-
-│   ├── test\_rules.py
-
-│   └── test\_validators.py
-
+│   ├── test_cleaning.py
+│   ├── test_profiler.py
+│   ├── test_reporting.py
+│   ├── test_rules.py
+│   └── test_validators.py
 │
-
 ├── app.py
-
 ├── requirements.txt
-
 ├── README.md
-
-└── LICENSE
-
+├── LICENSE
+└── .gitignore
 ```
 
+## How It Works
 
+1. Upload a CSV dataset through the Streamlit interface.
+2. Profile the dataset to understand its structure and quality.
+3. Load configurable validation rules from the YAML file.
+4. Execute validation checks using the reusable Python validation engine.
+5. Review failed checks, severity levels, and data quality metrics.
+6. Apply supported cleaning operations.
+7. Download the validation report and cleaned dataset.
 
-\### Application Workflow
+## Getting Started
 
-
-
-```text
-
-&#x20;      CSV Upload
-
-&#x20;          |
-
-&#x20;          v
-
-&#x20;   Dataset Profiling
-
-&#x20;          |
-
-&#x20;          v
-
-&#x20;   Load YAML Rules
-
-&#x20;          |
-
-&#x20;          v
-
-&#x20;  Data Validation Engine
-
-&#x20;          |
-
-&#x20;          v
-
-&#x20;   Validation Results
-
-&#x20;          |
-
-&#x20;          v
-
-&#x20;     Data Cleaning
-
-&#x20;          |
-
-&#x20;          v
-
-&#x20;  Reports and CSV Export
-
-```
-
-
-
-The validation and profiling logic is separated from the Streamlit interface, allowing the core functionality to be reused independently.
-
-
-
-\---
-
-
-
-\## ⚙️ Installation and Setup
-
-
-
-\### Prerequisites
-
-\- Python 3.12
-
-\- Git
-
-
-
-\### 1. Clone the repository
-
-
+### 1. Clone the repository
 
 ```bash
-
-git clone <YOUR\_GITHUB\_REPOSITORY\_URL>
-
+git clone https://github.com/nithyaa-d/dataguard-data-quality-monitor.git
 cd dataguard-data-quality-monitor
-
 ```
 
+### 2. Create a virtual environment
 
-
-\### 2. Create a virtual environment
-
-
-
-\*\*Windows CMD:\*\*
-
-
+**Windows:**
 
 ```cmd
-
 python -m venv .venv
-
-.venv\\Scripts\\activate
-
+.venv\Scripts\activate
 ```
 
-
-
-\### 3. Install dependencies
-
-
+**macOS / Linux:**
 
 ```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
 
-python -m pip install --upgrade pip
+### 3. Install dependencies
 
+```bash
 pip install -r requirements.txt
-
 ```
 
-
-
-\### 4. Run the application
-
-
+### 4. Run the application
 
 ```bash
-
 streamlit run app.py
-
 ```
 
+The application will open in your browser.
 
-
-Streamlit will provide a local URL, usually:
-
-
-
-```text
-
-http://localhost:8501
-
-```
-
-
-
-Upload a CSV file to start profiling and validating your dataset.
-
-
-
-\---
-
-
-
-\## 🧪 Testing
-
-
-
-DataGuard includes automated unit tests for its core modules.
-
-
+## Running Tests
 
 Run the complete test suite:
 
-
-
 ```bash
-
 pytest -v
-
 ```
-
-
 
 Run tests with coverage:
 
-
-
 ```bash
-
 pytest --cov=src.dataguard --cov-report=term-missing
-
 ```
 
-
-
-\### Current Test Results
-
-
+### Current Test Results
 
 | Metric | Result |
-
 |---|---:|
-
-| Total automated tests | 27 |
-
-| Tests passed | 27 |
-
-| Tests failed | 0 |
-
+| Total tests | 27 |
+| Passed | 27 |
+| Failed | 0 |
 | Overall code coverage | 94% |
 
+The test suite covers profiling, validation, cleaning, reporting, and YAML rule loading.
 
+## Continuous Integration
 
-Coverage is measured across the `src.dataguard` package.
+DataGuard uses GitHub Actions to automate testing.
 
+The workflow runs when code is pushed or a pull request is created against the `main` or `master` branch.
 
+It performs the following steps:
 
-\### Continuous Integration
+- Checks out the repository.
+- Sets up Python 3.12.
+- Installs project dependencies.
+- Executes the test suite with coverage reporting.
 
+## Sample Dataset
 
+A sample customer dataset is included in `tests/sample_data/customers.csv`.
 
-GitHub Actions is configured to:
+It contains intentional data quality issues, including:
 
-\- Set up Python 3.12
+- Missing values.
+- Duplicate customer identifiers.
+- Invalid email formats.
+- Invalid dates.
+- Negative revenue values.
+- Unexpected country and status values.
 
-\- Install project dependencies
+This dataset helps demonstrate how DataGuard identifies and reports data quality issues.
 
-\- Run automated tests
+## Future Enhancements
 
-\- Generate a coverage report
+- Support for additional file formats such as Excel and Parquet.
+- More configurable validation rules.
+- Database connectivity and scheduled validation.
+- Historical data quality tracking.
+- Enhanced reporting and visualization.
+- Cloud deployment and integration with data pipelines.
 
+## Author
 
-
-The workflow runs on pushes and pull requests targeting the `main` or `master` branches.
-
-
-
-\---
-
-
-
-\## 📊 Sample Dataset
-
-
-
-A sample customer dataset is included at:
-
-
-
-`tests/sample\_data/customers.csv`
-
-
-
-It contains 100 records and intentionally introduced data quality issues, including:
-
-\- Missing values
-
-\- Duplicate customer identifiers
-
-\- Invalid email addresses
-
-\- Invalid dates
-
-\- Unexpected categorical values
-
-\- Negative revenue values
-
-
-
-This dataset can be used to explore the profiling, validation, and cleaning functionality.
-
-
-
-\---
-
-
-
-\## 🔮 Future Enhancements
-
-
-
-Potential extensions include:
-
-\- Additional configurable validation rules
-
-\- Support for Excel and database sources
-
-\- Historical data quality tracking
-
-\- Scheduled validation runs
-
-\- Database integration
-
-\- Cloud deployment
-
-\- Advanced data quality visualizations
-
-
-
-\---
-
-
-
-\## 👩‍💻 Author
-
-
-
-\*\*Nithya Doresha\*\*
-
-
+**Nithya Doresha**
 
 Data Engineer | Analytics Engineer | Data Analyst
 
+- **LinkedIn:** [linkedin.com/in/nithyad2608](https://www.linkedin.com/in/nithyad2608/)
+- **GitHub:** [github.com/nithyaa-d](https://github.com/nithyaa-d)
 
+---
 
-\- \[LinkedIn](https://www.linkedin.com/in/nithyad2608/)
-
-\- \[GitHub](https://github.com/nithyaa-d)
-
-
-
-\---
-
-
-
-\*Built as a hands-on project to demonstrate Python-based data profiling, configurable validation, data cleaning, automated testing, and continuous integration.\*
-
+*Built to demonstrate practical data engineering, data quality, Python development, testing, and automation skills.*
