@@ -1,28 +1,34 @@
-# DataGuard — Data Quality Monitor
+# DataGuard | Data Quality Monitor
 
-A configurable data quality monitoring and validation application built with **Python, Pandas, YAML, and Streamlit**. DataGuard helps identify data issues, profile datasets, validate business rules, and perform basic data cleaning through an interactive dashboard.
+**A Python-based data quality monitoring and validation application built with Pandas, YAML, and Streamlit.**
 
-## Overview
+DataGuard helps identify data quality issues, profile datasets, validate business rules, and perform basic data cleaning through an interactive dashboard.
 
-Data quality is essential for reliable analytics and decision-making. DataGuard provides a reusable validation engine and an interactive interface to help users understand dataset quality, detect inconsistencies, and generate validation reports.
+---
 
-The project demonstrates practical data engineering concepts, including modular Python development, configurable validation rules, automated testing, and CI/CD.
+## Project Overview
 
-## Key Features
+Reliable data is the foundation of effective analytics and decision-making. DataGuard provides a reusable validation engine and an interactive interface to help users assess dataset quality, identify inconsistencies, and generate validation reports.
 
-- **Dataset Profiling:** Analyze row counts, column types, missing values, duplicate records, unique values, and numerical statistics.
-- **Configurable Validation:** Define data quality rules using YAML without changing the validation engine.
-- **Validation Engine:** Check required columns, missing values, uniqueness, email formats, dates, numeric types, non-negative values, and allowed categories.
-- **Interactive Dashboard:** Upload CSV files and explore profiling and validation results through Streamlit.
-- **Data Cleaning:** Trim whitespace, standardize empty strings, and optionally remove duplicate rows.
-- **Validation Reporting:** Generate downloadable validation reports and cleaned datasets.
-- **Automated Testing:** Unit tests with pytest and code coverage reporting.
-- **Continuous Integration:** GitHub Actions workflow to run tests automatically on pushes and pull requests.
+The project demonstrates practical data engineering concepts, including modular Python development, configurable validation rules, automated testing, and continuous integration.
+
+## Features
+
+| Feature | Description |
+|:---|:---|
+| Dataset Profiling | Analyze dimensions, data types, missing values, duplicates, unique values, and numerical statistics. |
+| Configurable Rules | Define validation rules through YAML configuration. |
+| Validation Engine | Detect missing fields, duplicate values, invalid emails, dates, numeric values, and unexpected categories. |
+| Interactive Dashboard | Upload CSV files and explore results using Streamlit. |
+| Data Cleaning | Trim whitespace, standardize empty strings, and optionally remove duplicate rows. |
+| Reporting | Generate downloadable validation reports and cleaned datasets. |
+| Automated Testing | Validate application logic using pytest and coverage reporting. |
+| CI/CD | Run automated tests through GitHub Actions. |
 
 ## Technology Stack
 
-| Area | Technologies |
-|---|---|
+| Category | Tools |
+|:---|:---|
 | Programming | Python 3.12 |
 | Data Processing | Pandas |
 | Dashboard | Streamlit |
@@ -33,7 +39,7 @@ The project demonstrates practical data engineering concepts, including modular 
 
 ## Architecture
 
-The application follows a modular structure, keeping the data quality engine independent of the Streamlit interface.
+DataGuard follows a modular architecture that separates the core data quality engine from the user interface.
 
 ```text
 dataguard-data-quality-monitor/
@@ -73,17 +79,22 @@ dataguard-data-quality-monitor/
 └── .gitignore
 ```
 
-## How It Works
+## Application Workflow
 
-1. Upload a CSV dataset through the Streamlit interface.
-2. Profile the dataset to understand its structure and quality.
-3. Load configurable validation rules from the YAML file.
-4. Execute validation checks using the reusable Python validation engine.
-5. Review failed checks, severity levels, and data quality metrics.
-6. Apply supported cleaning operations.
+1. Upload a CSV dataset.
+2. Profile the dataset and inspect its structure.
+3. Load validation rules from the YAML configuration.
+4. Execute quality checks using the validation engine.
+5. Review validation results, failures, and severity levels.
+6. Apply supported data cleaning operations.
 7. Download the validation report and cleaned dataset.
 
 ## Getting Started
+
+### Prerequisites
+
+- Python 3.12 or later
+- Git
 
 ### 1. Clone the repository
 
@@ -92,16 +103,16 @@ git clone https://github.com/nithyaa-d/dataguard-data-quality-monitor.git
 cd dataguard-data-quality-monitor
 ```
 
-### 2. Create a virtual environment
+### 2. Create and activate a virtual environment
 
-**Windows:**
+**Windows (CMD)**
 
 ```cmd
 python -m venv .venv
 .venv\Scripts\activate
 ```
 
-**macOS / Linux:**
+**macOS / Linux**
 
 ```bash
 python3 -m venv .venv
@@ -114,75 +125,75 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 4. Run the application
+### 4. Launch the application
 
 ```bash
 streamlit run app.py
 ```
 
-The application will open in your browser.
+The dashboard will open in your default browser.
 
-## Running Tests
+## Testing & Code Coverage
 
-Run the complete test suite:
+Run the test suite:
 
 ```bash
 pytest -v
 ```
 
-Run tests with coverage:
+Generate a coverage report:
 
 ```bash
 pytest --cov=src.dataguard --cov-report=term-missing
 ```
 
-### Current Test Results
+### Test Results
 
 | Metric | Result |
-|---|---:|
+|:---|---:|
 | Total tests | 27 |
 | Passed | 27 |
 | Failed | 0 |
-| Overall code coverage | 94% |
+| Code coverage | 94% |
 
-The test suite covers profiling, validation, cleaning, reporting, and YAML rule loading.
+Tests cover the profiling, validation, cleaning, reporting, and YAML rule-loading modules.
 
 ## Continuous Integration
 
-DataGuard uses GitHub Actions to automate testing.
+GitHub Actions automates testing whenever code is pushed or a pull request is opened against the `main` or `master` branch.
 
-The workflow runs when code is pushed or a pull request is created against the `main` or `master` branch.
-
-It performs the following steps:
+The workflow:
 
 - Checks out the repository.
 - Sets up Python 3.12.
-- Installs project dependencies.
+- Installs dependencies.
 - Executes the test suite with coverage reporting.
 
 ## Sample Dataset
 
-A sample customer dataset is included in `tests/sample_data/customers.csv`.
+The repository includes a sample customer dataset at:
 
-It contains intentional data quality issues, including:
+`tests/sample_data/customers.csv`
+
+The dataset contains intentional quality issues to demonstrate validation capabilities:
 
 - Missing values.
 - Duplicate customer identifiers.
-- Invalid email formats.
+- Invalid email addresses.
 - Invalid dates.
 - Negative revenue values.
 - Unexpected country and status values.
 
-This dataset helps demonstrate how DataGuard identifies and reports data quality issues.
-
 ## Future Enhancements
 
-- Support for additional file formats such as Excel and Parquet.
-- More configurable validation rules.
+- Excel and Parquet file support.
+- Additional configurable validation rules.
 - Database connectivity and scheduled validation.
 - Historical data quality tracking.
-- Enhanced reporting and visualization.
-- Cloud deployment and integration with data pipelines.
+- Enhanced reporting and visualizations.
+- Cloud deployment and data pipeline integration.
+
+---
 
 ## Author
 
@@ -190,9 +201,8 @@ This dataset helps demonstrate how DataGuard identifies and reports data quality
 
 Data Engineer | Analytics Engineer | Data Analyst
 
-- **LinkedIn:** [linkedin.com/in/nithyad2608](https://www.linkedin.com/in/nithyad2608/)
-- **GitHub:** [github.com/nithyaa-d](https://github.com/nithyaa-d)
+[LinkedIn](https://www.linkedin.com/in/nithyad2608/) · [GitHub](https://github.com/nithyaa-d)
 
 ---
 
-*Built to demonstrate practical data engineering, data quality, Python development, testing, and automation skills.*
+*Developed to demonstrate practical data engineering, data quality management, Python development, testing, and automation.*
