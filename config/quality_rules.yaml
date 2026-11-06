@@ -1,0 +1,36 @@
+
+required_columns:
+  - customer_id
+  - full_name
+  - email
+  - signup_date
+  - country
+  - status
+  - revenue
+
+unique_columns:
+  - customer_id
+
+email_columns:
+  - email
+
+date_columns:
+  - signup_date
+
+numeric_columns:
+  - revenue
+
+non_negative_columns:
+  - revenue
+
+allowed_values:
+  country:
+    - Sweden
+    - Norway
+    - Germany
+    - Finland
+
+  status:
+    - Active
+    - Inactive
+    - Pending
